@@ -26,25 +26,47 @@ function init() {
     
     // Obtain values needed for the bar graph
     // Filter top 10 OTUs
-    var otuIds = samplesId.otu_ids.slice(0,10);
-    var sampleValues = samplesId.sample_values.slice(0,10);
-    var otuLabels = samplesId.otu_labels.slice(0,10);
+    var otuIds = samplesId.otu_ids.slice(0,10).reverse();
+    var sampleValues = samplesId.sample_values.slice(0,10).reverse();
+    var otuLabels = samplesId.otu_labels.slice(0,10).reverse();
+
+    // All OtuIds
+    var otuIdsAll = samplesId.otu_ids;
+    var sampleValuesAll = samplesId.sample_values;
+    var otuLabelsAll = samplesId.otuLabels
+
+    var newOtuIds = [];
+
+    for (var i = 0; i < otuIds.length; i++) {
+        newOtuIds.push(`OTU ${otuIds[i]}`)
+    }
 
     // Create trace
     var trace1 = {
         x: sampleValues,
-        y: otuIds,
+        y: newOtuIds,
         text: otuLabels,
         type: 'bar',
         orientation: 'h'
     }
 
-    var sampleData = trace1;
+    var trace2 = {
+        x: otuIdsAll,
+        y: sampleValuesAll,
+        mode: 'markers',
+        text: otuLabelsAll,
+        marker: {
+            size: sampleValuesAll,
+            color: otuIdsAll
+        }
+    }
 
-    console.log(trace1);
+    var sampleData = [trace1];
+    var bubbleData = [trace2];
 
-    Plotly.newPlot("bar", sampleData);
+    Plotly.newPlot('bar', sampleData);
 
+    Plotly.newPlot('bubble', bubbleData);
     });
 };
 
@@ -71,30 +93,37 @@ function optionChanged() {
                 samplesId = samples[i];
             }
         }
-    
+
     // Obtain values needed for the bar graph
     // Filter top 10 OTUs
-    var otuIds = samplesId.otu_ids.slice(0,10);
-    var sampleValues = samplesId.sample_values.slice(0,10);
-    var otuLabels = samplesId.otu_labels.slice(0,10);
+    var otuIds = samplesId.otu_ids.slice(0,10).reverse();
+    var sampleValues = samplesId.sample_values.slice(0,10).reverse();
+    var otuLabels = samplesId.otu_labels.slice(0,10).reverse();
 
-    // Create trace
-    var trace1 = {
-        x: sampleValues,
-        y: otuIds,
-        text: otuLabels,
-        type: 'bar',
-        orientation: 'h'
+    // All OtuIds
+    var otuIdsAll = samplesId.otu_ids;
+    var sampleValuesAll = samplesId.sample_values;
+    var otuLabelsAll = samplesId.otuLabels
+
+    var newOtuIds = [];
+
+    for (var i = 0; i < otuIds.length; i++) {
+        newOtuIds.push(`OTU ${otuIds[i]}`)
     }
 
-    var sampleData = trace1;
-
-    console.log(trace1);
-
-    Plotly.newPlot("bar", sampleData);
+    Plotly.restyle("bar", "x", [sampleValues]);
+    Plotly.restyle("bar", "y", [newOtuIds]);
+    Plotly.restyle("bar", "text", [otuLabels]);
     
+    Plotly.restyle("bubble", "x", [otuIdsAll]);
+    Plotly.restyle("bubble", "y", [sampleValuesAll]);
+    Plotly.restyle("bubble", "text", [otuLabelsAll]);
+    Plotly.restyle("bubble", "size", [sampleValuesAll]);
+    Plotly.restyle("bubble", "color", [otuIdsAll]);
+
     });
 };
+
 
 init();
 
