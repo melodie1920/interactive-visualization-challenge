@@ -15,15 +15,48 @@ function init() {
         }
 
     var samples = data.samples;
+    var meta = data.metadata;
     var samplesId = [];
+    var metaId = [];
 
     for (var i = 0; i < samples.length; i++) {
 
         if (samples[i].id === '940') {
             samplesId = samples[i];
+            metaId = meta[i];
         }
     }
     
+    var metaAge = metaId.age;
+    var metaBbtype = metaId.bbtype;
+    var metaEthnicity = metaId.ethnicity;
+    var metaGender = metaId.gender;
+    var metaLocation = metaId.location;
+    var metaWfreq = metaId.wfreq;
+
+    var sel = document.getElementById('sample-metadata');
+    var optId = document.createElement('p');
+    var optEthnicity = document.createElement('p');
+    var optGender = document.createElement('p');
+    var optAge = document.createElement('p');
+    var optLocation = document.createElement('p');
+    var optBbtype = document.createElement('p');
+    var optWfreq = document.createElement('p');
+    optId.appendChild(document.createTextNode("id: 940"));
+    optEthnicity.appendChild(document.createTextNode(`ethnicity: ${metaEthnicity}`));
+    optGender.appendChild(document.createTextNode(`gender: ${metaGender}`));
+    optAge.appendChild(document.createTextNode(`age: ${metaAge}`));
+    optLocation.appendChild(document.createTextNode(`location: ${metaLocation}`));
+    optBbtype.appendChild(document.createTextNode(`bbtype: ${metaBbtype}`));
+    optWfreq.appendChild(document.createTextNode(`wfreq: ${metaWfreq}`));
+    sel.appendChild(optId);
+    sel.appendChild(optEthnicity);
+    sel.appendChild(optGender);
+    sel.appendChild(optAge);
+    sel.appendChild(optLocation);
+    sel.appendChild(optBbtype);
+    sel.appendChild(optWfreq);
+
     // Obtain values needed for the bar graph
     // Filter top 10 OTUs
     var otuIds = samplesId.otu_ids.slice(0,10).reverse();
@@ -71,7 +104,7 @@ function init() {
 };
 
 // Call updatePlotly() when a change takes place to the DOM
-d3.selectAll("body").on("change", optionChanged);
+//d3.selectAll("body").on("change", optionChanged);
 
 // This function is called when a dropdown menu item is selected
 function optionChanged() {
@@ -85,14 +118,49 @@ function optionChanged() {
     d3.json("data/samples.json").then((data) => {
         
         var samples = data.samples;
+        var meta = data.metadata;
         var samplesId = [];
-
+        var metaId = [];
+    
         for (var i = 0; i < samples.length; i++) {
 
             if (samples[i].id === dataset) {
                 samplesId = samples[i];
+                metaId = meta[i];
             }
         }
+
+        var metaAge = metaId.age;
+        var metaBbtype = metaId.bbtype;
+        var metaEthnicity = metaId.ethnicity;
+        var metaGender = metaId.gender;
+        var metaLocation = metaId.location;
+        var metaWfreq = metaId.wfreq;
+
+        document.getElementById('sample-metadata').innerHTML = "";
+
+        var sel = document.getElementById('sample-metadata');
+        var optId = document.createElement('p');
+        var optEthnicity = document.createElement('p');
+        var optGender = document.createElement('p');
+        var optAge = document.createElement('p');
+        var optLocation = document.createElement('p');
+        var optBbtype = document.createElement('p');
+        var optWfreq = document.createElement('p');
+        optId.appendChild(document.createTextNode(`id: ${dataset}`));
+        optEthnicity.appendChild(document.createTextNode(`ethnicity: ${metaEthnicity}`));
+        optGender.appendChild(document.createTextNode(`gender: ${metaGender}`));
+        optAge.appendChild(document.createTextNode(`age: ${metaAge}`));
+        optLocation.appendChild(document.createTextNode(`location: ${metaLocation}`));
+        optBbtype.appendChild(document.createTextNode(`bbtype: ${metaBbtype}`));
+        optWfreq.appendChild(document.createTextNode(`wfreq: ${metaWfreq}`));
+        sel.appendChild(optId);
+        sel.appendChild(optEthnicity);
+        sel.appendChild(optGender);
+        sel.appendChild(optAge);
+        sel.appendChild(optLocation);
+        sel.appendChild(optBbtype);
+        sel.appendChild(optWfreq);
 
     // Obtain values needed for the bar graph
     // Filter top 10 OTUs
