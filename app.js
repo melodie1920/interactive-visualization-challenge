@@ -192,6 +192,5 @@ function optionChanged() {
     });
 };
 
-
 init();
 
