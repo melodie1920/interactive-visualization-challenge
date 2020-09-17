@@ -100,6 +100,107 @@ function init() {
     Plotly.newPlot('bar', sampleData);
 
     Plotly.newPlot('bubble', bubbleData);
+
+    var gaugeDiv = document.getElementById("gauge");
+
+    var traceGauge = {
+        type: 'pie',
+        showlegend: false,
+        hole: 0.4,
+        rotation: 90,
+        values: [81/9,81/9,81/9,81/9,81/9,81/9,81/9,81/9,81/9,81],
+        text: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9',''],
+        direction: 'clockwise',
+        textinfo: 'text',
+        textposition: 'inside',
+        marker: {
+            colors: [
+                "rgba(232, 226, 202, .5)",
+                "rgba(220, 215, 175, .5)",
+                "rgba(211, 210, 110, .5)",
+                "rgba(190, 204, 80, .5)",
+                "rgba(170, 202, 42, .5)",
+                "rgba(150, 190, 32, .5)",
+                "rgba(125, 170, 27, .5)",
+                "rgba(110, 154, 22, .5)",
+                "rgba(14, 127, 0, .5)",
+                'white'],
+            labels: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9',''],
+            hoverinfo: 'label'
+        }
+        }
+
+    if (metaWfreq === 0) {
+        x = 0.29;
+        y = 0.5;
+    }
+
+    else if (metaWfreq === 1) {
+        x = 0.29;
+        y = 0.55;
+    }
+
+    else if (metaWfreq === 2) {
+        x = 0.345;
+        y = 0.6;
+    }
+
+    else if (metaWfreq === 3) {
+        x = 0.39;
+        y = 0.64;
+    }
+
+    else if (metaWfreq === 4) {
+        x = 0.47;
+        y = 0.65;
+    }
+
+    else if (metaWfreq === 5) {
+        x = 0.54;
+        y = 0.65;
+    }
+
+    else if (metaWfreq === 6) {
+        x = 0.59;
+        y = 0.63;
+    }
+
+    else if (metaWfreq === 7) {
+        x = 0.66;
+        y = 0.60;
+    }
+
+    else if (metaWfreq === 8) {
+        x = 0.70;
+        y = 0.56;
+    }
+
+    else {
+        x = 0.71;
+        y = 0.50;
+    }
+
+    var gaugeLayout = {
+    shapes: [{
+        type: 'line',
+        x0: 0.5,
+        y0: 0.5,
+        x1: x,
+        y1: y,
+        line: {
+        color: 'black',
+        width: 3
+        }
+    }],
+    title: '<b>Belly Button Washing Frequency</b><br>Scrubs Per Week',
+    xaxis: {visible: false, range: [-1, 1]},
+    yaxis: {visible: false, range: [-1, 1]}
+    }
+
+    var dataGauge = [traceGauge];
+
+    Plotly.newPlot(gaugeDiv, dataGauge, gaugeLayout);//, {staticPlot: true});
+
     });
 };
 
@@ -188,6 +289,113 @@ function optionChanged() {
     Plotly.restyle("bubble", "text", [otuLabelsAll]);
     Plotly.restyle("bubble", "size", [sampleValuesAll]);
     Plotly.restyle("bubble", "color", [otuIdsAll]);
+
+    var gaugeDiv = document.getElementById("gauge");
+
+    var traceGauge = {
+        type: 'pie',
+        showlegend: false,
+        hole: 0.4,
+        rotation: 90,
+        values: [81/9,81/9,81/9,81/9,81/9,81/9,81/9,81/9,81/9,81],
+        text: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9',''],
+        direction: 'clockwise',
+        textinfo: 'text',
+        textposition: 'inside',
+        marker: {
+            colors: [
+                "rgba(232, 226, 202, .5)",
+                "rgba(220, 215, 175, .5)",
+                "rgba(211, 210, 110, .5)",
+                "rgba(190, 204, 80, .5)",
+                "rgba(170, 202, 42, .5)",
+                "rgba(150, 190, 32, .5)",
+                "rgba(125, 170, 27, .5)",
+                "rgba(110, 154, 22, .5)",
+                "rgba(14, 127, 0, .5)",
+                'white'],
+            labels: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9',''],
+            hoverinfo: 'label'
+        }
+        }
+
+    if (metaWfreq === 0) {
+        x = 0.29;
+        y = 0.5;
+    }
+
+    else if (metaWfreq === null) {
+        x = 0.29;
+        y = 0.5;
+    }
+
+    else if (metaWfreq === 1) {
+        x = 0.29;
+        y = 0.55;
+    }
+
+    else if (metaWfreq === 2) {
+        x = 0.345;
+        y = 0.6;
+    }
+
+    else if (metaWfreq === 3) {
+        x = 0.39;
+        y = 0.64;
+    }
+
+    else if (metaWfreq === 4) {
+        x = 0.47;
+        y = 0.65;
+    }
+
+    else if (metaWfreq === 5) {
+        x = 0.54;
+        y = 0.65;
+    }
+
+    else if (metaWfreq === 6) {
+        x = 0.59;
+        y = 0.63;
+    }
+
+    else if (metaWfreq === 7) {
+        x = 0.66;
+        y = 0.60;
+    }
+
+    else if (metaWfreq === 8) {
+        x = 0.70;
+        y = 0.56;
+    }
+
+    else {
+        x = 0.71;
+        y = 0.50;
+    }
+
+    var gaugeLayout = {
+        shapes: [{
+            type: 'line',
+            x0: 0.5,
+            y0: 0.5,
+            x1: x,
+            y1: y,
+            line: {
+            color: 'black',
+            width: 3
+            }
+        }],
+        title: '<b>Belly Button Washing Frequency</b><br>Scrubs Per Week',
+        xaxis: {visible: false, range: [-1, 1]},
+        yaxis: {visible: false, range: [-1, 1]}
+        }
+    
+        var dataGauge = [traceGauge];
+
+        console.log(gaugeLayout);
+    
+        Plotly.newPlot(gaugeDiv, dataGauge, gaugeLayout);
 
     });
 };
